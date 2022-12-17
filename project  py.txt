@@ -1,0 +1,17 @@
+import requests
+import bs4
+laptop = []
+price = []
+rate = []
+result = requests.get ("https://2b.com.eg/ar/computers/laptops/dell.html")
+page = result.content
+soup = bs4.BeautifulSoup(page,"html.parser")
+laptops = soup.find_all("strong", {"class":"product name product-item-name"})
+prices =  soup.find_all("span",{"class":"price"})
+rates = soup.find_all("div",{"class":"rating-result"})
+for i in range(len(laptops)):
+    laptop.append(laptops[i].text)
+    price.append(prices[i].text)
+    rate.append(rates[i].text)
+for z in range(len(laptop)):
+    print(laptop[z],price[z],rate[z])
